@@ -71,7 +71,7 @@
           <label for="todo_dueDate">Due Date</label>
           <input type="date" id="todo_dueDate" v-model="modalTodo.dueDate">
         </div>
-        <div v-if="openModalAct==='編輯'">
+        <div v-if=" ==='編輯'">
           <label for="status">狀態</label>
           <select v-model="modalTodo.status">
             <option value="待辦">待辦</option>

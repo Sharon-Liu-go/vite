@@ -2,26 +2,26 @@ import HomePage from "./pages/HomePage.vue"
 import Header from "./pages/Header.vue"
 import Todos from "./pages/Notes.vue"
 import Me from "./pages/Me.vue"
-import Signup from "./pages/SignupPage.vue"
+import SignUp from "./pages/SignupPage.vue"
 import SignIn from "./pages/SignInPage.vue"
 import FooterExample from "./pages/FooterExample.vue"
 
 
 import { createRouter, createWebHistory } from "vue-router";
 import { getJwtToken } from "./apis/auth"
-import { useTokenStore } from "./stores/token"
 import { useUserStore } from "./stores/users"
 
 
 const routes = [
   {
-    path: "/signin",
+    path: "/signIn",
     component: SignIn,
-    name: "signin"
+    name: "signIn"
   },
   {
-    path: "/signup",
-    component: Signup
+    path: "/signUp",
+    component: SignUp,
+    name: "signUp"
   },
   {
     path: "/home",
@@ -47,28 +47,28 @@ const router = createRouter({
 })
 
 router.beforeEach((async (to, from, next) => {
+  console.log('to', to, 'from', from)
   try {
+    const notNeedAuthenticated = ['signIn', 'signUp']
     const jwtToken = getJwtToken()
-    if (!jwtToken) {
+    if (!jwtToken && !notNeedAuthenticated.includes(to.name)) {
       next('/signIn')
       return
     }
     const userStore = useUserStore();
-    const tokenStore = useTokenStore();
+    const isLoggedIn = await userStore.isLoggedIn()
+    console.log('to sign-in or sign up ? : ', !notNeedAuthenticated.includes(to.name))
+    console.log('isLoggedIn : ', isLoggedIn)
 
-    console.log(1, !userStore.user)
-    console.log(2, tokenStore.token !== jwtToken)
-    console.log(3, !userStore.isLoggedIn())
-
-    if ((!userStore.user || tokenStore.token !== jwtToken || !userStore.isLoggedIn()) && to.name === 'signin') {
-      next('/signIn')
+    if (!isLoggedIn && !notNeedAuthenticated.includes(to.name)) {
+      next('/signin')
       return
     }
-
-    if (userStore.user && tokenStore.token === jwtToken || userStore.isLoggedIn() && to.name === 'signin') {
+    if (isLoggedIn && notNeedAuthenticated.includes(to.name)) {
       next('/home');
       return
     }
+
     next()
 
   } catch (err) {

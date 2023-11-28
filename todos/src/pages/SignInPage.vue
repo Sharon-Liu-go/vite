@@ -17,7 +17,7 @@
       <el-button type="primary" style="width : 100%" @click="onSubmit">Sign in</el-button>
     </el-form-item>
     <el-form-item>
-      <router-link to='/signup'>Sign up</router-link>
+      <router-link to='/signUp'>Sign up</router-link>
     </el-form-item>
   </el-form> 
   </el-container>
@@ -31,6 +31,7 @@ import axios from 'axios'
 import {setJwtToken} from '../apis/auth'
 import { useRouter } from 'vue-router';
 import {useUserStore} from '../stores/users'
+import {useTokenStore} from '../stores/token'
 
 const size = ref('Large')
 const labelPosition = ref('left')
@@ -49,12 +50,16 @@ async function onSubmit() {
    if(res.code !== 0){
      //to to 失敗訊息
    }
+
+   //將token存至localstorage
    setJwtToken(res.data.jwt) 
 
    //將token存到store
    const tokenStore = useTokenStore();
+   console.log(tokenStore.token)
    tokenStore.token = res.data.jwt;
 
+   console.log('res.data',res.data)
    //將user放到store
    const userStore = useUserStore();
    userStore.user.name = res.data.user.name;
@@ -64,6 +69,7 @@ async function onSubmit() {
 
    router.replace('/home') 
   }catch(err){
+    // TO DO : 跳出登入失敗
     console.log(err)
   }
 }

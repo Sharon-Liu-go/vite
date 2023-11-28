@@ -66,7 +66,7 @@ const sizeForm = reactive({
 
 async function onSubmit() {
   try{
-  const res = await axios.post(`http://localhost:3000/signup`,sizeForm);
+  const res = await axios.post(`http://localhost:3000/signUp`,sizeForm);
   }catch(err){
     console.log(err)
   }

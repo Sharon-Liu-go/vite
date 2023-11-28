@@ -1,7 +1,8 @@
 <template>
   <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-    <el-radio-button :label="false">expand</el-radio-button>
-    <el-radio-button :label="true">collapse</el-radio-button>
+    
+    <el-radio-button :label="false"><el-icon><ArrowRight /></el-icon></el-radio-button>
+    <el-radio-button :label="true"><el-icon><ArrowLeft /></el-icon></el-radio-button>
   </el-radio-group>
   <el-menu
     default-active="1"
@@ -15,16 +16,13 @@
       <el-icon><setting /></el-icon>
       <template #title>關於我</template>
     </el-menu-item>
-      </router-link>
-          <router-link to="/aboutMe">  
+    </router-link>
+    <router-link to="/aboutMe">  
     <el-menu-item index="2">
       <el-icon><document /></el-icon>
-   
-
       <template #title>To Do List</template>
-
     </el-menu-item>
-          </router-link>
+        </router-link>
   </el-menu>
 
 </template>
@@ -36,6 +34,8 @@ import {
   Menu as IconMenu,
   Location,
   Setting, 
+  ArrowRight,
+  ArrowLeft,
 } from '@element-plus/icons-vue'
 
 const isCollapse = ref(true)

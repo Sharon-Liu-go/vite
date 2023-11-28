@@ -22,6 +22,7 @@
       <template #title>Navigator Four</template>
       </router-link>
     </el-menu-item>
+
   </el-menu>
 </template>
 
@@ -32,6 +33,7 @@ import {
   Menu as IconMenu,
   Location,
   Setting,
+  ArrowRight
 } from '@element-plus/icons-vue'
 
 const isCollapse = ref(true)

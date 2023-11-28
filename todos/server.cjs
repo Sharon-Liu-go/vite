@@ -19,6 +19,17 @@ const users = {
   '1': { id: 1, name: 'sh', birthday: '2023.1.1', gender: 'female', password: '123' }
 }
 
+const authenticate = function (req, res, next) {
+  console.log('headers:', req.headers.authorization);
+  const token = req.headers.authorization
+  if (token === "Bearer 123") {
+    req.user = {};
+    req.user.name = users['1'].name
+    next()
+    return
+  }
+  res.send({ code: 1 })
+}
 
 app.use((req, res, next) => {
   console.log('----')
@@ -31,6 +42,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept,Authorization");
   next();
 })
+
 app.get('/todos', (req, res) => {
   res.send(tableData)
 })
@@ -68,8 +80,8 @@ app.delete('/todo/:index', (req, res) => {
   res.status(200).send(tableData);
 })
 
-app.post('/signup', (req, res) => {
-  console.log('I am signup')
+app.post('/signUp', (req, res) => {
+  console.log('I am signUp')
   const form = req.body;
   console.log('form', form)
   res.status(200).send('success')
@@ -78,14 +90,18 @@ app.post('/signup', (req, res) => {
 app.post('/signIn', (req, res) => {
   console.log('I am signIn', req.body)
   const { email, password } = req.body;
-  const user = users[email];
+  const user = Object.assign({}, users[email]);
   console.log(user, user.password)
   if (user && user.password === password) {
     delete user.password
-    res.status(200).send({ code: 0, jwt: 123, user, msg: 'SUCCESS' })
+    res.status(200).send({ code: 0, jwt: "123", user, msg: 'SUCCESS' })
     return
   }
   res.status(200).send({ code: 1, msg: 'Failure' })
+})
+
+app.post('/authToken', authenticate, (req, res) => {
+  res.status(200).send({ code: 0, user: req.user })
 })
 
 app.listen(port, () => {

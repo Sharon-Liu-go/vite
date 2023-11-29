@@ -5,7 +5,6 @@
     <el-radio-button :label="true"><el-icon><ArrowLeft /></el-icon></el-radio-button>
   </el-radio-group>
   <el-menu
-
     default-active="1"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"

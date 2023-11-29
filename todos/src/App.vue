@@ -32,7 +32,7 @@ export default {
    <div class="common-layout">
     <el-container class='container'>
       <el-aside v-if="isLoggedIn" width="200px"><LeftNav /></el-aside>
-      <el-container>       
+      <el-container class='content'>       
         <el-header>
           <router-view name="nav"></router-view>                  
         </el-header>

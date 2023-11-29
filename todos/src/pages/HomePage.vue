@@ -1,57 +1,47 @@
 <template>
-  <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-    
-
-    
-    <el-radio-button :label="false"><el-icon><ArrowRight /></el-icon></el-radio-button>
-    <el-radio-button :label="true"><el-icon><ArrowLeft /></el-icon></el-radio-button>
-  </el-radio-group>
-  <el-menu
-    default-active="1"
-    class="el-menu-vertical-demo"
-    :collapse="isCollapse"
-    @open="handleOpen"
-    @close="handleClose"
-  >
-   <router-link to="/home">
-    <el-menu-item index="1">
-      <el-icon><setting /></el-icon>
-      <template #title>關於我</template>
-    </el-menu-item>
-    </router-link>
-    <router-link to="/aboutMe">  
-    <el-menu-item index="2">
-      <el-icon><document /></el-icon>
-      <template #title>To Do List</template>
-    </el-menu-item>
-        </router-link>
-  </el-menu>
+  <main>
+  <h1>Welcome! {{name}}</h1>
+  <div class="box"></div>
+  </main>
 
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting, 
-  ArrowRight,
-  ArrowLeft,
-} from '@element-plus/icons-vue'
-
-const isCollapse = ref(true)
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+<script setup>
+import {ref} from 'vue'
+import {useUserStore} from '../stores/users';
+const userStore = useUserStore();
+const name = ref('');
+name.value = userStore.user.name
 </script>
+<style scoped>
 
-<style>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 100%;
+main{
+  display: grid;
+  place-items: center;
 }
+
+.box{
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(
+    45deg,
+    hsl(183, 80%, 62%),
+    hsl(72, 85%, 44%)
+  ) ;
+  margin: 50px;
+  padding:0.5em,1.4em;
+  border-radius: 4px;
+  color: beige;
+
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 </style>

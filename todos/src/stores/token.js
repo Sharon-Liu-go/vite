@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { ref } from "vue"
 import axios from "axios"
 import { useUserStore } from "./users"
+import { clearLocalStorage } from "../apis/auth"
 
 export const useTokenStore = defineStore("token", () => {
   const token = ref('')
@@ -22,5 +23,11 @@ export const useTokenStore = defineStore("token", () => {
     return [false]
   }
 
-  return { token, authToken };
+  const removeToken = async function () {
+    clearLocalStorage()
+    token.value = ""
+    //user也清空
+  }
+
+  return { token, authToken, removeToken };
 })

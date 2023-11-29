@@ -1,7 +1,7 @@
-import HomePage from "./pages/HomePage.vue"
 import Header from "./pages/Header.vue"
-import Todos from "./pages/Notes.vue"
-import Me from "./pages/Me.vue"
+import HomePage from "./pages/HomePage.vue"
+import Todos from "./pages/Todos.vue"
+import Setting from "./pages/Setting.vue"
 import SignUp from "./pages/SignupPage.vue"
 import SignIn from "./pages/SignInPage.vue"
 import FooterExample from "./pages/FooterExample.vue"
@@ -27,12 +27,20 @@ const routes = [
     path: "/home",
     components: {
       nav: Header,
-      default: Me,
+      default: HomePage,
       footer: FooterExample
     }
   },
   {
-    path: "/aboutMe",
+    path: "/setting",
+    components: {
+      nav: Header,
+      default: Setting,
+      footer: FooterExample
+    }
+  },
+  {
+    path: "/todos",
     components: {
       nav: Header,
       default: Todos,
@@ -65,7 +73,7 @@ router.beforeEach((async (to, from, next) => {
       return
     }
     if (isLoggedIn && notNeedAuthenticated.includes(to.name)) {
-      next('/home');
+      next('/setting');
       return
     }
 
@@ -79,5 +87,3 @@ router.beforeEach((async (to, from, next) => {
 
 
 export default router;
-
-

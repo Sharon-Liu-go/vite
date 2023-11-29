@@ -1,32 +1,43 @@
 <script>
-//import Todos from './components/Todos.vue'
 import Vmodel from './components/Vmodel.vue'
 import Event from './components/Event.vue'
 import Form from './components/Form.vue'
 
+import LeftNav from './components/LeftNav.vue'
 
-import HomePage from "./pages/HomePage.vue"
-import Todos from "./pages/Notes.vue"
+import { ref ,watchEffect } from 'vue'
+import {useUserStore} from './stores/users'
+
+
 export default {
   // components : {Todos,Vmodel,Event,Form}
-  components : {HomePage,Todos}
+  components : {
+    LeftNav,
+  },
+  setup(){
+    let isLoggedIn = ref(false);
+    const userStore = useUserStore()
+    // 监听 store 中某个状态的变化
+    watchEffect(async () => {
+    const newValue = await userStore.isLoggedIn();
+    console.log(`isLoggedIn changed to ${newValue}`);
+    isLoggedIn.value = newValue;
+  })
+  return {isLoggedIn}
+  }
 }
 </script>
 
-  <!-- <nav >
-    <router-link to="/home">首頁</router-link>  
-    <router-view></router-view>
-  </nav> -->
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-aside width="200px"><HomePage /></el-aside>
+   <div class="common-layout">
+    <el-container class='container'>
+      <el-aside v-if="isLoggedIn" width="200px"><LeftNav /></el-aside>
       <el-container>       
         <el-header>
           <router-view name="nav"></router-view>                  
         </el-header>
        
-        <el-main>
+        <el-main >
           <router-view ></router-view>
         </el-main>
 
@@ -36,7 +47,6 @@ export default {
       </el-container>
     </el-container>
   </div>
-
   <!-- <Todos /> -->
   <!-- <Vmodel /> -->
   <!-- <Event /> -->
@@ -44,4 +54,8 @@ export default {
 </template>
 
 <style scoped>
+ .container {
+  height: 100vh; /* 使 main 高度充满整个视口 */
+ }
+
 </style>

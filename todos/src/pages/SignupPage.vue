@@ -14,10 +14,10 @@
       <el-input v-model="sizeForm.email" />
     </el-form-item>
     <el-form-item label="Password">
-      <el-input v-model="sizeForm.password" />
+      <el-input type="password" v-model="sizeForm.password" />
     </el-form-item>
     <el-form-item label="ConfirmPassword">
-      <el-input v-model="sizeForm.confirmPassword" />
+      <el-input type="password" v-model="sizeForm.confirmPassword" />
     </el-form-item>
     <el-form-item label="Birthday">
       <el-date-picker

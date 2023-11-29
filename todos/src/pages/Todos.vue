@@ -66,13 +66,18 @@ const todoList = ref([]);
 export default{
   setup(){
     onMounted(async()=>{
+      try{
       const res = await axios.get('http://localhost:3000/todos');
       console.log(res.data)
       todoList.value = res.data;
+      }catch(err){
+      console.log('todo:',err)
+      }
+
     })
 
     let dialogFormVisible = ref(false)
-    const formLabelWidth = '140px'
+    const formLabelWidth = '120px'
     let formTitle = ref('');
     const form = reactive({
         createDate: '',

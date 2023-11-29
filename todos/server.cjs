@@ -16,15 +16,15 @@ const tableData = [
 ]
 
 const users = {
-  '1': { id: 1, name: 'sh', birthday: '2023.1.1', gender: 'female', password: '123' }
+  '1': { id: 1, name: 'Sharon', birthday: '2023-01-01', gender: 'female', password: '123', email: '1' }
 }
 
 const authenticate = function (req, res, next) {
   console.log('headers:', req.headers.authorization);
   const token = req.headers.authorization
   if (token === "Bearer 123") {
-    req.user = {};
-    req.user.name = users['1'].name
+    req.user = Object.assign({}, users['1']);
+    console.log('authenticate:', req.user)
     next()
     return
   }
@@ -101,7 +101,30 @@ app.post('/signIn', (req, res) => {
 })
 
 app.post('/authToken', authenticate, (req, res) => {
-  res.status(200).send({ code: 0, user: req.user })
+  res.status(200).send({ code: 0, user: { name: req.user.name } })
+})
+
+app.get('/user', authenticate, (req, res) => {
+  const user = {}
+  user.name = req.user.name
+  user.email = req.user.email
+  user.birthday = req.user.birthday
+  user.gender = req.user.gender
+  console.log("get user", user)
+  res.status(200).send({ code: 0, user })
+})
+
+app.post('/user', authenticate, (req, res) => {
+  const newSetting = req.body;
+  users[req.user.email].name = newSetting.name
+  users[req.user.email].birthday = newSetting.birthday
+  users[req.user.email].gender = newSetting.gender
+
+  const user = Object.assign({}, users[req.user.email])
+  delete user.password
+
+  console.log("post user", user)
+  res.status(200).send({ code: 0, user })
 })
 
 app.listen(port, () => {

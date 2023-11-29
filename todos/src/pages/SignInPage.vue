@@ -11,7 +11,7 @@
       <el-input v-model="sizeForm.email" />
     </el-form-item>
     <el-form-item label="Password">
-      <el-input v-model="sizeForm.password" />
+      <el-input type="password" v-model="sizeForm.password" />
     </el-form-item>
     <el-form-item>
       <el-button type="primary" style="width : 100%" @click="onSubmit">Sign in</el-button>

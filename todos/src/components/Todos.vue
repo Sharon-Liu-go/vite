@@ -1,6 +1,8 @@
 <template>
 <div>
-   <button @click="openModal()">新增</button>    
+   <div class="" style="margin-bottom:100px">
+    <button @click="openModal()" >新增</button>    
+   </div>
    <table class="todo-list-table" >
       <thead>
         <tr>
@@ -170,7 +172,18 @@ export default {
   color: navy
 }
 
+
+.el-table--fit{
+    background: hsl(221, 100%, 13%);;
+}
+
+.el-table__inner-wrapper{
+    background: hsl(221, 100%, 13%);;
+}
+
+
 .todo-list-table{
+  margin-top: 5px;
    width: 100%; /* 设置表格宽度为100% */
 }
 

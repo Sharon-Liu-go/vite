@@ -17,7 +17,7 @@
       <el-button type="primary" style="width : 100%" @click="onSubmit">Sign in</el-button>
     </el-form-item>
     <el-form-item>
-      <router-link to='/signUp'>Sign up</router-link>
+      <router-link to='/signUp' style="color: white">Sign up</router-link>
     </el-form-item>
   </el-form> 
   </el-container>
@@ -76,6 +76,33 @@ async function onSubmit() {
 </script>
 
 <style>
+
+html  {
+  background: hsl(221, 100%, 13%);
+  font-family: Arial, sans-serif;
+  color: hsl(221, 100%, 86%);
+}
+
+.el-form-item {
+  text-align: start;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+
+.el-form-item__content {
+  color: '#696974';
+  text-align: start;
+}
+
+.el-input {
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background-color: #f5f8fa;
+  
+}
+
 .el-radio-group {
   margin-right: 12px;
 }

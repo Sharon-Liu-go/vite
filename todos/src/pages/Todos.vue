@@ -1,6 +1,9 @@
 <template>
-  <el-button type="success" :icon="Plus" circle  @click="showForm({})"/>
-  <el-table :data="todoList" height="100%" style="width: 100% ">
+
+  <div class="table">
+
+ <el-button type="success" :icon="Plus" circle  @click="showForm({})"/>
+  <el-table :data="todoList" height="100%" style="width: 100% "  :row-class-name="tableRowClassName">
     <el-table-column prop="createDate" label="建立日期" width="auto" />
     <el-table-column prop="item" label="Item" width="auto" />
     <el-table-column prop="dueDate" label="Due Date" width="auto" />
@@ -16,8 +19,6 @@
       </template>
     </el-table-column>
   </el-table>
-
-
   <el-dialog v-model="dialogFormVisible" :title='formTitle'>
     <el-form :model="form">
       <el-form-item label="Item" :label-width="formLabelWidth">
@@ -34,7 +35,7 @@
         <el-select v-model="form.status">
           <el-option
             v-for="(statusText, statusNum) in statusList" :label="statusText" :value="statusNum"
-    ></el-option>
+          ></el-option>
         </el-select>
       </el-form-item>
     </el-form>
@@ -47,6 +48,9 @@
       </span>
     </template>
   </el-dialog>
+
+  </div>
+ 
 
 </template>
 
@@ -136,6 +140,15 @@ export default{
 </script>
 
 <style scoped>
+
+.el-button--success  {
+  margin-bottom: 15px;
+}
+
+.el-table__body-wrapper{
+  background: hsl(221, 100%, 13%);
+}
+
 .el-button--text {
   margin-right: 15px;
 }
@@ -147,5 +160,10 @@ export default{
 }
 .dialog-footer button:first-child {
   margin-right: 10px;
+}
+
+.el-table {
+  --el-table-tr-bg-color: hsl(221, 100%, 13%);
+  color : goldenrod
 }
 </style>

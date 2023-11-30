@@ -53,9 +53,13 @@ export default {
   <!-- <Form /> -->
 </template>
 
-<style scoped>
+<style>
+
  .container {
   height: 100vh; /* 使 main 高度充满整个视口 */
  }
 
+ a {
+  text-decoration: none; /* 去掉連結的底線 */ 
+ }
 </style>

@@ -1,11 +1,13 @@
 <template>
   <nav>
- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+ <el-radio-group v-model="isCollapse">
     <el-radio-button :label="false"><el-icon><ArrowRight /></el-icon></el-radio-button>
     <el-radio-button :label="true"><el-icon><ArrowLeft /></el-icon></el-radio-button>
   </el-radio-group>
   <el-menu
+    text-color='#dfe2e8'
     default-active="1"
+    background-color="#85a5c7"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
     @open="handleOpen"
@@ -13,7 +15,7 @@
   >
   <router-link to="/home">
     <el-menu-item index="1">
-      <el-icon><setting /></el-icon>
+      <el-icon><HomeFilled /></el-icon>
       <template #title>Home</template>
     </el-menu-item>
     </router-link>
@@ -31,7 +33,7 @@
     </router-link>
 
     <el-menu-item index="4" @click="logout">
-      <el-icon><document /></el-icon>
+      <el-icon><SwitchButton /></el-icon>
       <template #title>Logout</template>
     </el-menu-item>
   </el-menu>
@@ -49,6 +51,8 @@ import {
   Setting, 
   ArrowRight,
   ArrowLeft,
+  HomeFilled,
+  SwitchButton
 } from '@element-plus/icons-vue'
 import { useTokenStore } from '../stores/token'
 import { useRouter } from 'vue-router';
@@ -70,9 +74,11 @@ const logout = () => {
 
 </script>
 
-<style>
+<style scoped>
+
 .el-menu-vertical-demo:not(.el-menu--collapse) {
+ 
+  background: hsl(221, 100%, 13%);;
   width: 200px;
-  min-height: 100%;
 }
 </style>

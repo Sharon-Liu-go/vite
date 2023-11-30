@@ -40,7 +40,7 @@
       <el-button>Cancel</el-button>
     </el-form-item>
     <el-form-item>
-      <router-link to='/signIn'>Sign in</router-link>
+      <router-link style="color: white" to='/signIn'>Sign in</router-link>
     </el-form-item>
   </el-form> 
   </el-container>
@@ -74,8 +74,12 @@ async function onSubmit() {
 
 </script>
 
-<style>
+<style scoped>
 .el-radio-group {
   margin-right: 12px;
+}
+
+html {
+ background: hsl(221, 100%, 13%);
 }
 </style>

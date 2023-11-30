@@ -1,11 +1,16 @@
 <template>
-  <h1>I am a footer !</h1>
+<div class="now">
+  <p>@TAIWAN</p>
+</div>
+
 </template>
-<script>
-export default {
-  
-}
+<script setup>
 </script>
 <style scoped>
 
+  .now {
+    color : burlywood;
+    display: grid;
+    place-items: center;
+  }
 </style>

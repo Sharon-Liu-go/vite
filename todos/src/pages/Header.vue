@@ -6,11 +6,13 @@
   </header>
 </template>
 <script setup>
-  import {ref} from 'vue'
+  import {ref, computed} from 'vue'
   import {useUserStore} from '../stores/users';
 const userStore = useUserStore();
-const name = ref('');
-name.value = userStore.user.name
+const name = computed(() => {
+  return userStore.user.name
+})
+// name.value = userStore.user.name
 </script>
 
 <style scoped>

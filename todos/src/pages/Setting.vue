@@ -46,15 +46,17 @@ import axios from 'axios'
 //const size = ref('Large')
 //const labelPosition = ref('left')
 
+
+
+import {useTokenStore} from "../stores/token"
+import {useUserStore} from "../stores/users"
+
 const sizeForm = reactive({
   name: '',
   email: '',
   birthday: '',
   gender: '',
 })
-
-import {useTokenStore} from "../stores/token"
-
 const tokenStore = useTokenStore();
 const headers = {
   headers: {
@@ -84,6 +86,9 @@ async function onSubmit() {
      sizeForm.email = res.data.user.email;
      sizeForm.birthday = res.data.user.birthday;
     sizeForm.gender = res.data.user.gender;
+    const userStore = useUserStore()
+    userStore.user.name = sizeForm.name;
+
   }catch(err){
     console.log(err)
   }

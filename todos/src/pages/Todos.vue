@@ -107,7 +107,7 @@ export default{
       form.id = row.id || '';
       form.item = row.item || '';
       form.dueDate = row.dueDate || '';
-      form.status = row.status || 0;
+      form.status = row.status || '0';
       dialogFormVisible.value = true;
     }
 

@@ -5,6 +5,9 @@ import Setting from "./pages/Setting.vue"
 import SignUp from "./pages/SignupPage.vue"
 import SignIn from "./pages/SignInPage.vue"
 import FooterExample from "./pages/FooterExample.vue"
+import inspect from "./pages/Inspect.vue"
+
+
 
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -44,6 +47,14 @@ const routes = [
     components: {
       nav: Header,
       default: Todos,
+      footer: FooterExample
+    }
+  },
+  {
+    path: "/inspect",
+    components: {
+      nav: Header,
+      default: inspect,
       footer: FooterExample
     }
   },

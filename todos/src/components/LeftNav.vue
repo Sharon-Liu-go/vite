@@ -36,6 +36,13 @@
       <el-icon><SwitchButton /></el-icon>
       <template #title>Logout</template>
     </el-menu-item>
+
+    <router-link to="/inspect">  
+    <el-menu-item index="5">
+      <el-icon><document /></el-icon>
+      <template #title>inspect</template>
+    </el-menu-item>
+    </router-link>
   </el-menu>
   </nav>
  
